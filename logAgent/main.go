@@ -1,8 +1,8 @@
 package main
 
 import (
-	"LogCollection/logAgent/kafka"
-	"LogCollection/logAgent/tailLog"
+	"github.com/doudou215/LogCollection/logAgent/kafka"
+	"github.com/doudou215/LogCollection/logAgent/tailLog"
 	"time"
 )
 

@@ -1,4 +1,4 @@
-module LogCollection/logAgent/tailLog
+module github.com/doudou215/LogCollection/logAgent/tailLog
 
 go 1.15
 

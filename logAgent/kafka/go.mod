@@ -1,4 +1,4 @@
-module LogCollection/logAgent/kafka
+module github.com/doudou215/LogCollection/logAgent/kafka
 
 go 1.15
 
