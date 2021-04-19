@@ -1,16 +1,21 @@
 package main
 
 import (
+	"fmt"
 	"github.com/doudou215/LogCollection/logAgent/kafka"
 	"github.com/doudou215/LogCollection/logAgent/tailLog"
+	"gopkg.in/ini.v1"
+	"logAgent/conf"
 	"time"
 )
+
+var cfg = new(conf.AppConf)
 
 func run() {
 	for {
 		select {
-		case line := <- tailLog.GetTailChan():
-			kafka.SentToKafka("web_log", line.Text)
+		case line := <-tailLog.GetTailChan():
+			kafka.SentToKafka(cfg.KafkaConf.Topic, line.Text)
 		default:
 			time.Sleep(time.Second)
 		}
@@ -18,17 +23,24 @@ func run() {
 }
 
 func main() {
-	err := kafka.Init([]string{"127.0.0.1:9092"})
+	//cfg, err := ini.Load("./conf/config.ini")
+	err := ini.MapTo(cfg, "./conf/config.ini")
 	if err != nil {
-		print(err)
+		fmt.Println("ini load error ", err)
 		return
 	}
 
-	err = tailLog.Init("./myLog")
+	err = kafka.Init([]string{cfg.KafkaConf.Address})
 	if err != nil {
-		print(err)
+		fmt.Println("kafka init error ", err)
 		return
 	}
-	
-	go run()
+
+	err = tailLog.Init(cfg.TailLogConf.Filename)
+	if err != nil {
+		fmt.Println("tail init error ", err)
+		return
+	}
+
+	run()
 }

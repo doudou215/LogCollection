@@ -17,8 +17,8 @@ func Init(filename string) error {
 		MustExist: false,
 		Poll:      true,
 	}
-
-	tailObj, err := tail.TailFile(filename, config)
+	var err error
+	tailObj, err = tail.TailFile(filename, config)
 	fmt.Println(tailObj.Filename)
 	if err != nil {
 		return err
