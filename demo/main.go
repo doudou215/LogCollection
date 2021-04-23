@@ -1,32 +1,50 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"github.com/Shopify/sarama"
+	"go.etcd.io/etcd/client/v3"
+	"time"
 )
 
 func main() {
-	config := sarama.NewConfig()
-	config.Producer.RequiredAcks = sarama.WaitForAll // 生产者等待leader和follower都回复Ack
-	config.Producer.Partitioner = sarama.NewRandomPartitioner
-	config.Producer.Return.Successes = true // not clear
-
-	msg := &sarama.ProducerMessage{}
-	msg.Topic = "zyl"
-	msg.Value = sarama.StringEncoder("zyl love zsj")
-
-	client, err := sarama.NewSyncProducer([]string{"127.0.0.1:9092"}, config)
-	if err != nil{
-		fmt.Println(err)
-	}
-	defer client.Close()
-
-	pid, offset, err := client.SendMessage(msg)
-
-	if err != nil{
-		fmt.Println(err)
+	cli, err := clientv3.New(clientv3.Config{
+		Endpoints:   []string{"127.0.0.1:2379"},
+		DialTimeout: 5 * time.Second,
+	})
+	if err != nil {
+		fmt.Println("client initialize error ", err)
+		return
 	}
 
-	fmt.Printf("%v offset %v", pid, offset)
+	fmt.Println("connected to etcd successfully")
+	defer cli.Close()
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	_, err = cli.Put(ctx, "zyl", "zsj")
+	cancel()
+	if err != nil {
+		fmt.Println("etcd put error ", err)
+		return
+	}
+
+	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
+	rets, err := cli.Get(ctx, "zyl")
+	cancel()
+	if err != nil {
+		fmt.Println("etcd get error", err)
+		return
+	}
+
+	for _, ev := range rets.Kvs {
+		fmt.Printf("%s : %s\n", ev.Key, ev.Value)
+	}
+
+	ch := cli.Watch(context.Background(), "zyl")
+	for ret := range ch {
+		for _, ev := range ret.Events {
+			fmt.Printf("type %s, key %s, value %s\n", ev.Type, ev.Kv.Key, ev.Kv.Value)
+		}
+	}
 
 }
