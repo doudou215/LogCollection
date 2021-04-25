@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/doudou215/LogCollection/logAgent/etcd"
 	"github.com/doudou215/LogCollection/logAgent/kafka"
 	"github.com/doudou215/LogCollection/logAgent/tailLog"
 	"gopkg.in/ini.v1"
@@ -35,6 +36,8 @@ func main() {
 		fmt.Println("kafka init error ", err)
 		return
 	}
+
+	err = etcd.Init(cfg.EtcdConf.Address, time.Duration(cfg.EtcdConf.Timeout)*time.Second)
 
 	err = tailLog.Init(cfg.TailLogConf.Filename)
 	if err != nil {
