@@ -6,7 +6,9 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/doudou215/LogCollection v0.0.0-20210423061642-1ff25059b999 h1:7RC/gfj2Xvu08Ancpfu/lhMxWQUa3SXM2N8vpyD+wsk=
 github.com/doudou215/LogCollection v0.0.0-20210425045528-6bbda01ea355 h1:JnMf8sWLfd6px924/vKkXdancpPrYIzY7WG4CLiiqWQ=
+github.com/doudou215/LogCollection v0.0.0-20210425045834-f8dc4c1aad1f h1:FhAK8AiOyaqN8Putk4gXBgTFJIpvqkK9avY56YgeMd4=
 github.com/doudou215/LogCollection/logAgent v0.0.0-20210414030034-871832341527 h1:kBx5KhjPKY6MJfMFzpC6h0rHXhc4t10WAmDyglvxr7U=
+github.com/doudou215/LogCollection/logAgent v0.0.0-20210425045834-f8dc4c1aad1f h1:9Hm+NHocXqozFDB3dLmItECAJrlYGSoP+DH7GMU8P3U=
 github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210414030034-871832341527 h1:OU0jTUK/b0f5r+gKRWVN0OkAw0ZYNOQrqE7dM6WZde4=
 github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210414030034-871832341527/go.mod h1:Xz21UcYRP93qoVu9LGCR3Md1hRLUyRPhfhP1yQ6F3+g=
 github.com/doudou215/LogCollection/logAgent/tailLog v0.0.0-20210414030034-871832341527 h1:4qaRulVf/gqfNXGEqoTpEPmJi0wBFjNZrXlNv1XuqFQ=

@@ -1,4 +1,4 @@
-module etcd
+module github.com/doudou215/LogCollection/logAgent/etcd
 
 go 1.15
 
