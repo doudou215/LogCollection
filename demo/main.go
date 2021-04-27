@@ -21,7 +21,8 @@ func main() {
 	defer cli.Close()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	_, err = cli.Put(ctx, "zyl", "zsj")
+	value := `[{"path":"d:/tmp/log","topic":"web_log"},{"path":"d:/QMDownload","topic":"web_log"}]`
+	_, err = cli.Put(ctx, "zyl", value)
 	cancel()
 	if err != nil {
 		fmt.Println("etcd put error ", err)

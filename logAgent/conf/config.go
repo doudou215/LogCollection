@@ -12,6 +12,7 @@ type KafkaConf struct {
 
 type EtcdConf struct {
 	Address string `ini:"address"`
+	Key     string `ini:"key"`
 	Timeout int    `ini:"timeout"`
 }
 

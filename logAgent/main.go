@@ -12,6 +12,7 @@ import (
 
 var cfg = new(conf.AppConf)
 
+/*
 func run() {
 	for {
 		select {
@@ -22,6 +23,7 @@ func run() {
 		}
 	}
 }
+*/
 
 func main() {
 	//cfg, err := ini.Load("./conf/config.ini")
@@ -39,11 +41,19 @@ func main() {
 
 	err = etcd.Init(cfg.EtcdConf.Address, time.Duration(cfg.EtcdConf.Timeout)*time.Second)
 
-	err = tailLog.Init(cfg.TailLogConf.Filename)
-	if err != nil {
-		fmt.Println("tail init error ", err)
-		return
-	}
+	logEntries, err := etcd.GetConf(cfg.EtcdConf.Key)
 
-	run()
+	for _, ev := range logEntries {
+		fmt.Printf("key: %v value：%v\n", ev.Path, ev.Topic)
+	}
+	tailLog.Init(logEntries)
+
+	/*
+		err = tailLog.Init(cfg.TailLogConf.Filename)
+		if err != nil {
+			fmt.Println("tail init error ", err)
+			return
+		}
+	*/
+	// run()
 }

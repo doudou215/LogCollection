@@ -13,5 +13,5 @@ require (
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/pierrec/lz4 v2.6.0+incompatible // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
-	go.etcd.io/etcd/client/v3 v3.5.0-alpha.0 // indirect
+	go.etcd.io/etcd/client/v3 v3.5.0-alpha.0
 )

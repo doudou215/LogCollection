@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/Shopify/toxiproxy v2.1.4+incompatible // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/doudou215/LogCollection/logAgent/etcd v0.0.0-20210425052621-e056a62cdada
 	github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210414030034-871832341527
 	github.com/doudou215/LogCollection/logAgent/tailLog v0.0.0-20210414030034-871832341527
 	github.com/eapache/go-resiliency v1.2.0 // indirect
