@@ -4,8 +4,8 @@ go 1.15
 
 require (
 	github.com/Shopify/toxiproxy v2.1.4+incompatible // indirect
-	github.com/doudou215/LogCollection/logAgent/etcd v0.0.0-20210425052621-e056a62cdada
-	github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210425052621-e056a62cdada
+	github.com/doudou215/LogCollection/logAgent/etcd v0.0.0-20210427122413-b40e17fb3b97
+	github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210427122413-b40e17fb3b97
 	github.com/eapache/go-resiliency v1.2.0 // indirect
 	github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 // indirect
 	github.com/eapache/queue v1.1.0 // indirect

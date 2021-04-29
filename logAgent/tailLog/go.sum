@@ -26,10 +26,10 @@ github.com/creack/pty v1.1.11/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/doudou215/LogCollection/logAgent/etcd v0.0.0-20210425052621-e056a62cdada h1:m1vaa2x+9frSjGi0oAK+W3+tLpq7esqd0x7+H0E222c=
-github.com/doudou215/LogCollection/logAgent/etcd v0.0.0-20210425052621-e056a62cdada/go.mod h1:QnlxPq+VvLHplP3npwfc0UF9trfSXtHPw5VYrSAsel8=
-github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210425052621-e056a62cdada h1:krQD4j+YdQJdLHIGQAUS9bMOfvZmwaDphfmvyqekn8M=
-github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210425052621-e056a62cdada/go.mod h1:Xz21UcYRP93qoVu9LGCR3Md1hRLUyRPhfhP1yQ6F3+g=
+github.com/doudou215/LogCollection/logAgent/etcd v0.0.0-20210427122413-b40e17fb3b97 h1:jxN5c90LASCMXqQp1KzDmBgUGzmcOrBytuGNuDJoESo=
+github.com/doudou215/LogCollection/logAgent/etcd v0.0.0-20210427122413-b40e17fb3b97/go.mod h1:QnlxPq+VvLHplP3npwfc0UF9trfSXtHPw5VYrSAsel8=
+github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210427122413-b40e17fb3b97 h1:SqGxbzvJ72RDNzu9oWkPRWNjEbnqjOubVNZ2WcHrDKA=
+github.com/doudou215/LogCollection/logAgent/kafka v0.0.0-20210427122413-b40e17fb3b97/go.mod h1:Xz21UcYRP93qoVu9LGCR3Md1hRLUyRPhfhP1yQ6F3+g=
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/eapache/go-resiliency v1.2.0 h1:v7g92e/KSN71Rq7vSThKaWIq68fL4YHvWyiUKorFR1Q=
 github.com/eapache/go-resiliency v1.2.0/go.mod h1:kFI+JgMyC7bLPUVY133qvEBtVayf5mFgVsvEsIPBvNs=

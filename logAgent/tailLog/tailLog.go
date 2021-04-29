@@ -17,11 +17,11 @@ func NewTailTask(path, topic string) (tailObj *TailTak) {
 		path:  path,
 		topic: topic,
 	}
-	tailObj.Init()
+	tailObj.init()
 	return
 }
 
-func (t *TailTak) Init() {
+func (t *TailTak) init() {
 	config := tail.Config{
 		ReOpen:    true,
 		Follow:    true,
