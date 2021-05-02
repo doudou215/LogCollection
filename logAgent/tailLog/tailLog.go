@@ -6,14 +6,14 @@ import (
 	"github.com/hpcloud/tail"
 )
 
-type TailTak struct {
+type TailTask struct {
 	path     string
 	topic    string
 	instance *tail.Tail
 }
 
-func NewTailTask(path, topic string) (tailObj *TailTak) {
-	tailObj = &TailTak{
+func NewTailTask(path, topic string) (tailObj *TailTask) {
+	tailObj = &TailTask{
 		path:  path,
 		topic: topic,
 	}
@@ -21,7 +21,7 @@ func NewTailTask(path, topic string) (tailObj *TailTak) {
 	return
 }
 
-func (t *TailTak) init() {
+func (t *TailTask) init() {
 	config := tail.Config{
 		ReOpen:    true,
 		Follow:    true,
@@ -41,11 +41,11 @@ func (t *TailTak) init() {
 	return
 }
 
-func (t *TailTak) run() {
+func (t *TailTask) run() {
 	for {
 		select {
 		case line := <-t.instance.Lines:
-			kafka.SentToKafka(t.topic, line.Text)
+			kafka.SendToChan(t.topic, line.Text)
 		}
 	}
 }

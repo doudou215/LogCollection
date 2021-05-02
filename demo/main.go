@@ -21,8 +21,8 @@ func main() {
 	defer cli.Close()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	value := `[{"path":"d:/tmp/log","topic":"web_log"},{"path":"d:/QMDownload","topic":"web_log"}]`
-	_, err = cli.Put(ctx, "zyl", value)
+	value := `[{"path":"D:/apache/kafka_2.13-2.7.0/logs/server.log","topic":"server_log"},{"path":"D:/log/test.log","topic":"test_log"}]`
+	_, err = cli.Put(ctx, "log2topic", value)
 	cancel()
 	if err != nil {
 		fmt.Println("etcd put error ", err)
@@ -30,7 +30,7 @@ func main() {
 	}
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
-	rets, err := cli.Get(ctx, "zyl")
+	rets, err := cli.Get(ctx, "log2topic")
 	cancel()
 	if err != nil {
 		fmt.Println("etcd get error", err)

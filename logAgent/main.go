@@ -33,7 +33,7 @@ func main() {
 		return
 	}
 
-	err = kafka.Init([]string{cfg.KafkaConf.Address})
+	err = kafka.Init([]string{cfg.KafkaConf.Address}, cfg.KafkaConf.MaxChanSize)
 	if err != nil {
 		fmt.Println("kafka init error ", err)
 		return
@@ -41,7 +41,11 @@ func main() {
 
 	err = etcd.Init(cfg.EtcdConf.Address, time.Duration(cfg.EtcdConf.Timeout)*time.Second)
 
+	//fmt.Println("key ", cfg.EtcdConf.Key)
 	logEntries, err := etcd.GetConf(cfg.EtcdConf.Key)
+	if err != nil {
+		return
+	}
 
 	for _, ev := range logEntries {
 		fmt.Printf("key: %v value：%v\n", ev.Path, ev.Topic)
