@@ -49,13 +49,13 @@ func sentToKafka() error {
 			msg.Topic = lg.topic
 			msg.Value = sarama.StringEncoder(lg.data)
 
-			pid, offset, err := client.SendMessage(msg)
+			_, _, err := client.SendMessage(msg)
 			if err != nil {
 				fmt.Println("send message to kafka error, ", err)
 				return err
 			}
 
-			fmt.Printf("pid %v offset %v\n", pid, offset)
+			//fmt.Printf("pid %v offset %v\n", pid, offset)
 		}
 
 	}

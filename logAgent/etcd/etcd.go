@@ -49,3 +49,21 @@ func GetConf(key string) (logEntries []*LogEntry, err error) {
 	}
 	return logEntries, err
 }
+
+func WatchConf(key string, newConfChan chan<- []*LogEntry) {
+	ch := cli.Watch(context.Background(), key)
+
+	for wresp := range ch {
+		for _, evt := range wresp.Events {
+			//fmt.Printf("events type %v Key %v value %v\n", evt.Type, evt.Kv.Key, evt.Kv.Value)
+			var newLogEntry []*LogEntry
+			if evt.Type != clientv3.EventTypeDelete {
+				err := json.Unmarshal(evt.Kv.Value, &newLogEntry)
+				if err != nil {
+					fmt.Println("watch function json unmarshal error ", err)
+				}
+			}
+			newConfChan <- newLogEntry
+		}
+	}
+}

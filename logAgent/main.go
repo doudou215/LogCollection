@@ -50,8 +50,11 @@ func main() {
 	for _, ev := range logEntries {
 		fmt.Printf("key: %v value：%v\n", ev.Path, ev.Topic)
 	}
-	tailLog.Init(logEntries)
 
+	tailLog.Init(logEntries)
+	newConfChan := tailLog.GetNewConfChan()
+	go etcd.WatchConf(cfg.EtcdConf.Key, newConfChan)
+	select {}
 	/*
 		err = tailLog.Init(cfg.TailLogConf.Filename)
 		if err != nil {

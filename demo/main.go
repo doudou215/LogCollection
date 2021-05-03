@@ -21,7 +21,7 @@ func main() {
 	defer cli.Close()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	value := `[{"path":"D:/apache/kafka_2.13-2.7.0/logs/server.log","topic":"server_log"},{"path":"D:/log/test.log","topic":"test_log"}]`
+	value := `[{"path":"D:/apache/kafka_2.13-2.7.0/logs/server.log","topic":"server_log"}]`
 	_, err = cli.Put(ctx, "log2topic", value)
 	cancel()
 	if err != nil {
@@ -40,12 +40,12 @@ func main() {
 	for _, ev := range rets.Kvs {
 		fmt.Printf("%s : %s\n", ev.Key, ev.Value)
 	}
-
-	ch := cli.Watch(context.Background(), "zyl")
-	for ret := range ch {
-		for _, ev := range ret.Events {
-			fmt.Printf("type %s, key %s, value %s\n", ev.Type, ev.Kv.Key, ev.Kv.Value)
+	/*
+		ch := cli.Watch(context.Background(), "zyl")
+		for ret := range ch {
+			for _, ev := range ret.Events {
+				fmt.Printf("type %s, key %s, value %s\n", ev.Type, ev.Kv.Key, ev.Kv.Value)
+			}
 		}
-	}
-
+	*/
 }

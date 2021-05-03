@@ -1,6 +1,7 @@
 package tailLog
 
 import (
+	"context"
 	"fmt"
 	"github.com/doudou215/LogCollection/logAgent/kafka"
 	"github.com/hpcloud/tail"
@@ -10,15 +11,20 @@ type TailTask struct {
 	path     string
 	topic    string
 	instance *tail.Tail
+	ctx      context.Context
+	cancel   context.CancelFunc
 }
 
 func NewTailTask(path, topic string) (tailObj *TailTask) {
+	ctx, cancel := context.WithCancel(context.Background())
 	tailObj = &TailTask{
-		path:  path,
-		topic: topic,
+		path:   path,
+		topic:  topic,
+		ctx:    ctx,
+		cancel: cancel,
 	}
 	tailObj.init()
-	return
+	return tailObj
 }
 
 func (t *TailTask) init() {
@@ -32,11 +38,11 @@ func (t *TailTask) init() {
 
 	var err error
 	t.instance, err = tail.TailFile(t.path, config)
-	fmt.Println("open file ", t.path)
 	if err != nil {
 		fmt.Println("open file error ", err)
 		return
 	}
+	fmt.Println("open file ", t.path)
 	go t.run()
 	return
 }
@@ -44,7 +50,11 @@ func (t *TailTask) init() {
 func (t *TailTask) run() {
 	for {
 		select {
+		case <-t.ctx.Done():
+			fmt.Printf("%s_%s quit\n", t.path, t.topic)
+			return
 		case line := <-t.instance.Lines:
+			fmt.Printf("%s\n", line.Text)
 			kafka.SendToChan(t.topic, line.Text)
 		}
 	}
