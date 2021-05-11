@@ -7,26 +7,15 @@ import (
 	"github.com/doudou215/LogCollection/logAgent/tailLog"
 	"gopkg.in/ini.v1"
 	"logAgent/conf"
+	"logAgent/utils"
 	"time"
 )
 
 var cfg = new(conf.AppConf)
 
-/*
-func run() {
-	for {
-		select {
-		case line := <-tailLog.GetTailChan():
-			kafka.SentToKafka(cfg.KafkaConf.Topic, line.Text)
-		default:
-			time.Sleep(time.Second)
-		}
-	}
-}
-*/
-
 func main() {
-	//cfg, err := ini.Load("./conf/config.ini")
+	//cfg, err := ini.Load("./conf/conf.ini")
+
 	err := ini.MapTo(cfg, "./conf/config.ini")
 	if err != nil {
 		fmt.Println("ini load error ", err)
@@ -38,6 +27,13 @@ func main() {
 		fmt.Println("kafka init error ", err)
 		return
 	}
+
+	ip, err := utils.GetOutBoundIP()
+	if err != nil {
+		fmt.Println("ip error")
+		return
+	}
+	fmt.Println("local address ", ip)
 
 	err = etcd.Init(cfg.EtcdConf.Address, time.Duration(cfg.EtcdConf.Timeout)*time.Second)
 
@@ -55,12 +51,5 @@ func main() {
 	newConfChan := tailLog.GetNewConfChan()
 	go etcd.WatchConf(cfg.EtcdConf.Key, newConfChan)
 	select {}
-	/*
-		err = tailLog.Init(cfg.TailLogConf.Filename)
-		if err != nil {
-			fmt.Println("tail init error ", err)
-			return
-		}
-	*/
-	// run()
+
 }

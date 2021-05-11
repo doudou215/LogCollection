@@ -21,7 +21,7 @@ func main() {
 	defer cli.Close()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	value := `[{"path":"D:/apache/kafka_2.13-2.7.0/logs/server.log","topic":"server_log"}]`
+	value := `[{"path":"D:/log/test.log","topic":"test_log"},{"path":"D:/apache/kafka_2.13-2.7.0/logs/server.log","topic":"server_log"}]`
 	_, err = cli.Put(ctx, "log2topic", value)
 	cancel()
 	if err != nil {

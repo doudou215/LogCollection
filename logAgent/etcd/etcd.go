@@ -31,7 +31,7 @@ func Init(addr string, timeout time.Duration) (err error) {
 // 已知key的情况下从etcd中读取value，这些value是通过jason的形式存放的
 // 所以要先经过反序列化才能用
 func GetConf(key string) (logEntries []*LogEntry, err error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	ret, err := cli.Get(ctx, key)
 	cancel()
 	if err != nil {
