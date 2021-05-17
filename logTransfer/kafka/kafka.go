@@ -7,7 +7,7 @@ import (
 )
 
 type LogData struct {
-	data string `json:"data"`
+	Data string `json:"data"`
 }
 
 func Init(address, topic string) (err error) {
@@ -35,9 +35,9 @@ func Init(address, topic string) (err error) {
 			fmt.Println("waiting for message")
 			for msg := range pc.Messages() {
 				lg := LogData{
-					data: string(msg.Value),
+					Data: string(msg.Value),
 				}
-				fmt.Println("%v", string(msg.Value))
+				fmt.Printf("%s\n", string(msg.Value))
 				es.SendToES(topic, lg)
 			}
 		}(pc)

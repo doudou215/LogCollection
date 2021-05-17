@@ -26,6 +26,7 @@ func SendToES(index string, data interface{}) (err error) {
 		fmt.Println("es put msg error ", err)
 		return err
 	}
+
 	fmt.Printf("%s has been sent to es %s\n", put1.Index, put1.Id)
 	return nil
 }
