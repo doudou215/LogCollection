@@ -6,10 +6,6 @@ import (
 	"logTransfer/es"
 )
 
-type LogData struct {
-	Data string `json:"data"`
-}
-
 func Init(address, topic string) (err error) {
 	consumer, err := sarama.NewConsumer([]string{address}, nil)
 	if err != nil {
@@ -34,11 +30,12 @@ func Init(address, topic string) (err error) {
 		go func(partitionConsumer sarama.PartitionConsumer) {
 			fmt.Println("waiting for message")
 			for msg := range pc.Messages() {
-				lg := LogData{
-					Data: string(msg.Value),
+				lg := es.LogData{
+					Topic: topic,
+					Data:  string(msg.Value),
 				}
 				fmt.Printf("%s\n", string(msg.Value))
-				es.SendToES(topic, lg)
+				es.SendToESchan(&lg)
 			}
 		}(pc)
 	}
